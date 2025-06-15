@@ -9,7 +9,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# 從 .env 讀取金鑰
 line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
 
@@ -35,4 +34,6 @@ def handle_message(event):
 print("Flask 正在啟動……")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
